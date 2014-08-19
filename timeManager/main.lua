@@ -1,4 +1,4 @@
---TimeManager
+--TimeManager v1.1
 --© 2014 Quartz Systems
 --A lightweight time-management app
 --Split code from lua-users.org/Split-Join
