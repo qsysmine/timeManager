@@ -134,9 +134,9 @@ onLoop = function()
 			end
 		end
 		if isWork then
-			tLT.text = timeLeft.." [Work]"
+			tLT.text = (timeLeft / 60 - timeLeft % 60).." [Work]"
 		else
-			tLT.text = timeLeft.." [Relaxation]"
+			tLT.text = (timeLeft / 60 - timeLeft % 60).." [Relaxation]"
 		end
 	end
 	delay()
