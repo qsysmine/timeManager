@@ -2,7 +2,7 @@
 --© 2014 Quartz Systems
 --A lightweight time-management app
 --Split code from lua-users.org/Split-Join
--- explode(seperator, string)
+--Code I copied off someone else's website
 function explode(d,p)
   local t, ll
   t={}
@@ -25,6 +25,7 @@ local formatting = {
 	cX = display.contentCenterX,
 	cY = display.contentCenterY
 }
+--Retrieve settings.txt
 local getSettings = function()
 	local settings = {}
 	local settingsH = io.open(system.pathForFile("settings.txt"), "r")
@@ -40,6 +41,7 @@ local getSettings = function()
 	end
 	return settings
 end
+--Change settings.txt
 local setSettings = function(settings)
 	local settingsH = io.open(system.pathForFile("settings.txt"),"w")
 	if settingsH then
@@ -55,26 +57,27 @@ local setSettings = function(settings)
 		print("Write successful, now closing.")
 	end
 end
---Title Screen
-local white = display.newImage("white.jpg")
+--Preload backgrounds
+local white = display.newImage("white.jpg") --White
 white.x = formatting.cX
 white.y = formatting.cY
 white:scale(2,2)
-local red = display.newImage("red.jpg")
+local red = display.newImage("red.jpg") --Red
 red.x = formatting.cX
 red.y = formatting.cY
 red.alpha = 0
 red:scale(2,2)
-local green = display.newImage("green.jpg")
+local green = display.newImage("green.jpg") --Green
 green.x = formatting.cX
 green.y = formatting.cY
 green.alpha = 0
 green:scale(2,2)
-local blue = display.newImage("blue.jpg")
+local blue = display.newImage("blue.jpg") --Blue
 blue.x = formatting.cX
 blue.y = formatting.cY
 blue.alpha = 0
 blue:scale(2,2)
+--Title screen
 local mainTitle = display.newText({text="TimeManager",x=-200,y=0,fontSize=50,font="HelveticaNeue-Light"})
 mainTitle:setTextColor(0,0,0)
 transition.to(mainTitle,{x=formatting.cX,time=500,transition=easing.inSine,onCompletion=sBIn})
@@ -82,8 +85,8 @@ local startButton = display.newText({text="Start",x=-10000,y=75,fontSize=40,font
 startButton:setTextColor(0,0,0)
 transition.to(startButton,{x=formatting.cX,time=1000,transition=easing.outSine})
 --Start Timer
-local settings = getSettings()
-local onLoop,delay,timeLeft,isWork,tLT,isStopped,currentColor
+local settings = getSettings() -- Grab dem settings
+local onLoop,delay,timeLeft,isWork,tLT,isStopped,currentColor -- Make sure these function can refer to eachother, as well as generic variable declaration
 currentColor = blue
 function changeColor(color)
 	local oldCC = currentColor
@@ -92,6 +95,7 @@ function changeColor(color)
 	transition.to(currentColor, {time=500,alpha=1,transition=easing.outSine})
 end
 isStopped = false
+--Toggle whether paused or playing
 function toggle()
 	if isStopped == true then
 		isStopped = false
@@ -111,6 +115,7 @@ tLT = display.newText({text=timeLeft,x=-1000,y=-100,fontSize=50,font="HelveticaN
 tLT:setTextColor(0,0,0)
 isWork = true
 tLT:addEventListener("tap",toggle)
+--Actually start timer
 local function startTimer()
 	transition.to(mainTitle,{time=1000,x=-1000})
 	transition.to(startButton,{time=1000,x=10000})
