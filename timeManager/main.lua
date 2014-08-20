@@ -1,8 +1,10 @@
 --TimeManager v1.1
 --© 2014 Quartz Systems
+
 --A lightweight time-management app
 --Split code from lua-users.org/Split-Join
---Code I copied off someone else's website
+
+--External Code {
 function explode(d,p)
   local t, ll
   t={}
@@ -20,7 +22,9 @@ function explode(d,p)
     end
   return t
 end
---Ari's code begins here.
+-- }
+--Internally created code {
+--Formatting constants
 local formatting = {
 	cX = display.contentCenterX,
 	cY = display.contentCenterY
@@ -77,14 +81,14 @@ blue.x = formatting.cX
 blue.y = formatting.cY
 blue.alpha = 0
 blue:scale(2,2)
---Title screen
+--Render title screen
 local mainTitle = display.newText({text="TimeManager",x=-200,y=0,fontSize=50,font="HelveticaNeue-Light"})
 mainTitle:setTextColor(0,0,0)
 transition.to(mainTitle,{x=formatting.cX,time=500,transition=easing.inSine,onCompletion=sBIn})
 local startButton = display.newText({text="Start",x=-10000,y=75,fontSize=40,font="HelveticaNeue-Light"})
 startButton:setTextColor(0,0,0)
 transition.to(startButton,{x=formatting.cX,time=1000,transition=easing.outSine})
---Start Timer
+--Timer functions
 local settings = getSettings() -- Grab dem settings
 local onLoop,delay,timeLeft,isWork,tLT,isStopped,currentColor -- Make sure these function can refer to eachother, as well as generic variable declaration
 currentColor = blue
@@ -95,7 +99,7 @@ function changeColor(color)
 	transition.to(currentColor, {time=500,alpha=1,transition=easing.outSine})
 end
 isStopped = false
---Toggle whether paused or playing
+--Toggle whether paused
 function toggle()
 	if isStopped == true then
 		isStopped = false
@@ -115,7 +119,7 @@ tLT = display.newText({text=timeLeft,x=-1000,y=-100,fontSize=50,font="HelveticaN
 tLT:setTextColor(0,0,0)
 isWork = true
 tLT:addEventListener("tap",toggle)
---Actually start timer
+--Timer starting function
 local function startTimer()
 	transition.to(mainTitle,{time=1000,x=-1000})
 	transition.to(startButton,{time=1000,x=10000})
@@ -123,6 +127,7 @@ local function startTimer()
 	changeColor(red)
 	onLoop()
 end
+--Loop function
 onLoop = function()
 	if isStopped then
 	else
@@ -146,7 +151,9 @@ onLoop = function()
 	end
 	delay()
 end
+--Timer delay function
 delay = function()
 	timer.performWithDelay(1000,onLoop)
 end
 startButton:addEventListener("tap",startTimer)
+-- }
