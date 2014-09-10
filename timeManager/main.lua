@@ -143,8 +143,10 @@ onLoop = function()
 				changeColor(red)
 			end
 		end
-		if isWork then
+		if isWork && timeLeft%60 > 9 then
 			tLT.text = (timeLeft / 60 - timeLeft/60 %1)..":"..(timeLeft%60).." [Work]"
+		else if isWork then
+			tLT.text = (timeLeft / 60 - timeLeft/60 % 1..":0"..(timeLeft%60).."[Work]"
 		else
 			tLT.text = (timeLeft / 60 - timeLeft/60 % 1)..":"..(timeLeft%60).." [Relaxation]"
 		end
