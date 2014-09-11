@@ -82,10 +82,10 @@ blue.y = formatting.cY
 blue.alpha = 0
 blue:scale(2,2)
 --Render title screen
-local mainTitle = display.newText({text="TimeManager",x=-200,y=0,fontSize=50,font="HelveticaNeue-Light"})
+local mainTitle = display.newText({text="TimeManager",x=-200,y=0,fontSize=50,font=native.systemFontBold})
 mainTitle:setTextColor(0,0,0)
 transition.to(mainTitle,{x=formatting.cX,time=500,transition=easing.inSine,onCompletion=sBIn})
-local startButton = display.newText({text="Start",x=-10000,y=75,fontSize=40,font="HelveticaNeue-Light"})
+local startButton = display.newText({text="Start",x=-10000,y=75,fontSize=40,font=native.systemFont})
 startButton:setTextColor(0,0,0)
 transition.to(startButton,{x=formatting.cX,time=1000,transition=easing.outSine})
 --Timer functions
@@ -115,7 +115,7 @@ function toggle()
 	print(isStopped)
 end
 timeLeft = settings.workInv
-tLT = display.newText({text=timeLeft,x=-1000,y=-100,fontSize=50,font="HelveticaNeue-Light"})
+tLT = display.newText({text=timeLeft,x=-1000,y=-100,fontSize=50,font=native.systemFont})
 tLT:setTextColor(0,0,0)
 isWork = true
 tLT:addEventListener("tap",toggle)
@@ -143,12 +143,18 @@ onLoop = function()
 				changeColor(red)
 			end
 		end
-		if isWork && timeLeft%60 > 9 then
-			tLT.text = (timeLeft / 60 - timeLeft/60 %1)..":"..(timeLeft%60).." [Work]"
-		else if isWork then
-			tLT.text = (timeLeft / 60 - timeLeft/60 % 1..":0"..(timeLeft%60).."[Work]"
+		if isWork then
+			if  timeLeft % 60 > 9 then
+				tLT.text = (timeLeft / 60 - timeLeft / 60 % 1)..":"..(timeLeft % 60).." [Work]"
+			else
+				tLT.text = (timeLeft / 60 - timeLeft / 60 % 1)..":0"..(timeLeft % 60).." [Work]"
+			end
 		else
-			tLT.text = (timeLeft / 60 - timeLeft/60 % 1)..":"..(timeLeft%60).." [Relaxation]"
+			if timeLeft % 60 > 9 then
+				tLT.text = (timeLeft / 60 - timeLeft / 60 % 1)..":"..(timeLeft % 60).." [Relaxation]"
+			else
+				tLt.text = (timeLeft / 60 - timeLeft / 60 % 1)..":0"..(timeLeft % 60).." [Relaxation]"
+			end
 		end
 	end
 	delay()
