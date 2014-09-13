@@ -153,7 +153,7 @@ onLoop = function()
 			if timeLeft % 60 > 9 then
 				tLT.text = (timeLeft / 60 - timeLeft / 60 % 1)..":"..(timeLeft % 60).." [Relaxation]"
 			else
-				tLt.text = (timeLeft / 60 - timeLeft / 60 % 1)..":0"..(timeLeft % 60).." [Relaxation]"
+				tLT.text = (timeLeft / 60 - timeLeft / 60 % 1)..":0"..(timeLeft % 60).." [Relaxation]"
 			end
 		end
 	end
