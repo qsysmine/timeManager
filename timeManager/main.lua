@@ -24,12 +24,12 @@ function explode(d,p)
 end
 -- }
 --Internally created code {
---Formatting constants
+--Formatting constants: Made by a lazy developer, for a lazy developer.
 local formatting = {
 	cX = display.contentCenterX,
 	cY = display.contentCenterY
 }
---Retrieve settings.txt
+--Retrieve settings.txt [Never needed :(]
 local getSettings = function()
 	local settings = {}
 	local settingsH = io.open(system.pathForFile("settings.txt"), "r")
@@ -45,7 +45,7 @@ local getSettings = function()
 	end
 	return settings
 end
---Change settings.txt
+--Change settings.txt [Never used]
 local setSettings = function(settings)
 	local settingsH = io.open(system.pathForFile("settings.txt"),"w")
 	if settingsH then
@@ -61,7 +61,7 @@ local setSettings = function(settings)
 		print("Write successful, now closing.")
 	end
 end
---Preload backgrounds
+--Preload backgrounds [Too lazy to generate them]
 local white = display.newImage("white.jpg") --White
 white.x = formatting.cX
 white.y = formatting.cY
@@ -81,7 +81,7 @@ blue.x = formatting.cX
 blue.y = formatting.cY
 blue.alpha = 0
 blue:scale(2,2)
---Render title screen
+--Render title screen [I really needed to do this?]
 local mainTitle = display.newText({text="TimeManager",x=-200,y=0,fontSize=50,font=native.systemFontBold})
 mainTitle:setTextColor(0,0,0)
 transition.to(mainTitle,{x=formatting.cX,time=500,transition=easing.inSine,onCompletion=sBIn})
